@@ -34,7 +34,7 @@ class FileSharedContextManager():
             self.file.close()
 
     def read(self):
-        return self.file.readlines()
+        return self.file.readline()
 
     def write(self):
         raise NotImplemented
