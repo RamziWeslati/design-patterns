@@ -2,16 +2,24 @@ from ..logger import logger
 
 
 class FileManagerFactory():
-    open_files = {}
+    """
+    FileManager factory implementing multiton pattern
+    """
+    files_pool = {}
 
     def __new__(cls, path, mode):
-        if path not in cls.open_files:
-            cls.open_files[path] = FileSharedContextManager(path, mode)
+        if path not in cls.files_pool:  # FIXME not thread safe
+            cls.files_pool[path] = FileSharedContextManager(path, mode)
 
-        return cls.open_files[path]
+        return cls.files_pool[path]
 
 
 class FileSharedContextManager():
+    """
+    File context manager that reuses same file instance
+     if used by multiple actors 
+    """
+
     def __init__(self, path, mode):
         logger.info(f'creating Manager for {path} with {mode} rights')
         self.n_opened = 0
