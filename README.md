@@ -1,2 +1,3 @@
 # design-patterns
-holds useful design patterns
+
+Design patterns notes and examples.

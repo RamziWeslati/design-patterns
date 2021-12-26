@@ -44,5 +44,13 @@ class FileSharedContextManager():
     def read(self):
         return self.file.readline()
 
-    def write(self):
-        raise NotImplemented
+    def write(self, text):
+        # FIXME check mode
+        if (self.n_opened > 1):
+            raise ConcurrentWriteError
+
+        self.file.write(text)
+
+
+class ConcurrentWriteError(Exception):
+    pass
