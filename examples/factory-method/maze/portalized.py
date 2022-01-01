@@ -50,11 +50,7 @@ class PortalMaze(Maze):
 
     def _is_out_of_bounderies(self, position: Position):
         x, y = position.x, position.y
-        if x < 0 or y < 0:
-            return True
-        if y >= len(self.squares) or x >= len(self.squares[y]):
-            return True
-        return False
+        return x < 0 or y < 0 or y >= len(self.squares) or x >= len(self.squares[y])
 
     def _get_maze_representation(self):
         maze_representation = super()._get_maze_representation()
