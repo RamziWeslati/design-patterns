@@ -26,7 +26,7 @@ class Maze(ABC):
         ...
 
     def __str__(self) -> str:
-        return self._get_maze_representation()
+        return grid_to_str(self._get_maze_representation())
 
     def __post_init__(self):
         self._validate_target()
